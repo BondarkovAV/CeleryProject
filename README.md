@@ -2,8 +2,6 @@
 
 Это простой работающий проект с использованием Celery, RabbitMQ, Redis, PostgreSQL, Docker.
 
-![Статус сборки](https://img.shields.io/badge/build-passing-brightgreen) ![Версия](https://img.shields.io/badge/version-1.0.0-blue) ![Лицензия](https://img.shields.io/badge/license-MIT-green) [![Стандарты кода](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://standardjs.com)
-
 ## Технологии
 
 - **FastAPI** - современный веб-фреймворк
@@ -33,7 +31,8 @@
 git clone https://github.com/BondarkovAV/CeleryProject.git
 cd CeleryProject
 ```
-2. Клонируйте репозиторий:
+2. Клонируйте настройки и заполните необходимый конфиг:
+###### *.env используется только при запуске без Docker и если не задан ENV*
 ```bash
 cp .env.example .env
 cp .env.example .env.dev
