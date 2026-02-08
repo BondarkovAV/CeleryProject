@@ -3,9 +3,10 @@ from fastapi import FastAPI
 import logging
 from .maindb.database import Base, engine
 from .api_main import celery_endpoints, orders_endpoints, users_endpoints
+from .config import settings
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=settings.logger.level)
 logger = logging.getLogger(__name__)
 
 
@@ -28,15 +29,15 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Celery Project",
-    description="Простое демонстрационное приложение",
-    version="1.0.0",
+    title=settings.app.name,
+    description=settings.app.title,
+    version=settings.app.version,
     lifespan=lifespan
 )
 
-app.include_router(celery_endpoints.router, prefix="/api/v1", tags=["celery"])
-app.include_router(orders_endpoints.router, prefix="/api/v1", tags=["orders"])
-app.include_router(users_endpoints.router, prefix="/api/v1", tags=["users"])
+app.include_router(celery_endpoints.router, prefix=settings.app.api_prefix, tags=["celery"])
+app.include_router(orders_endpoints.router, prefix=settings.app.api_prefix, tags=["orders"])
+app.include_router(users_endpoints.router, prefix=settings.app.api_prefix, tags=["users"])
 
 
 @app.get("/")

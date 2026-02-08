@@ -1,10 +1,11 @@
+from app.config import settings
 from celery import Celery
 
 
 celery_app = Celery(
     "worker",
-    broker="amqp://guest:guest@rabbitmq:5672//",
-    backend="redis://redis:6379/0",
+    broker=settings.rabbitmq.dsn.encoded_string(),
+    backend=settings.redis.dsn.encoded_string(),
 )
 celery_app.autodiscover_tasks(
     ["app.workers"],

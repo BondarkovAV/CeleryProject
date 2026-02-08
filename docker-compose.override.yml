@@ -5,8 +5,13 @@ services:
     build:
       context: .
       dockerfile: docker/backend.Dockerfile
+    image: my-app:${TAG:-latest}
+    container_name: my-app
+    restart: unless-stopped
+    environment:
+      - ENV=dev  # значение по умолчанию
     env_file:
-      - .env  # основной файл
+      - .env.dev  # переопределение
     depends_on:
       - db
       - rabbitmq
@@ -18,8 +23,10 @@ services:
     build:
       context: .
       dockerfile: docker/celery.Dockerfile
+    environment:
+      - ENV=dev  # значение по умолчанию
     env_file:
-      - .env  # основной файл
+      - .env.dev  # переопределение
     depends_on:
       - backend
       - rabbitmq
@@ -36,7 +43,7 @@ services:
       timeout: 5s
       retries: 5
     env_file:
-      - .env
+      - .env.dev
 
   rabbitmq:
     image: rabbitmq:4-management
