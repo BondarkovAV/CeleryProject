@@ -8,9 +8,13 @@ services:
     env_file:
       - .env  # основной файл
     depends_on:
-      - db
-      - rabbitmq
-      - redis
+      db:
+        condition: service_healthy
+        restart: true
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
     ports:
       - "8000:8000"
 
