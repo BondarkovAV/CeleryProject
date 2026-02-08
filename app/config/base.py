@@ -41,6 +41,7 @@ class Settings(BaseSettings):
     rabbitmq: RabbitmqSettings
     celery: CelerySettings
     logger: LoggerSettings
+    tag: str = 'latest'
     postgres_user: str = 'postgres'
     postgres_password: str = 'postgres'
     postgres_db: str = 'postgres'
