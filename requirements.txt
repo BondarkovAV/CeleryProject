@@ -4,9 +4,11 @@ pydantic[email]
 pydantic
 sqlalchemy>=2.0
 asyncpg
+psycopg2
 celery
 redis
 pika
 python-dotenv
 kombu
 pydantic-settings
+alembic
